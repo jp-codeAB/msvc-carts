@@ -7,7 +7,6 @@ import com.springcloud.msvc_carts.infrastructure.persistence.entity.CartEntity;
 import com.springcloud.msvc_carts.infrastructure.persistence.repository.ICartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;

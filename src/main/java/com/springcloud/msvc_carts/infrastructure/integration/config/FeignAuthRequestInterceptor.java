@@ -5,7 +5,6 @@ import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import java.util.stream.Collectors;
 
 @Configuration
@@ -24,7 +23,7 @@ public class FeignAuthRequestInterceptor implements RequestInterceptor {
             AuthUser authUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
             String roles = authUser.getAuthorities().stream()
-                    .map(g -> g.getAuthority().replace("ROLE_", "")) // Quitar prefijo ROLE_
+                    .map(g -> g.getAuthority().replace("ROLE_", ""))
                     .collect(Collectors.joining(","));
 
             template.header(USER_ID_HEADER, authUser.getId().toString());

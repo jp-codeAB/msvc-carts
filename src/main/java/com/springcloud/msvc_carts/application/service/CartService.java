@@ -81,7 +81,6 @@ public class CartService implements IManageCartUseCase, IAbandonedCartUseCase {
                 orderId,
                 formattedDate
         );
-
         return new CheckoutConfirmationResponse(orderId, confirmationMessage);
     }
 
