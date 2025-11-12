@@ -1,10 +1,10 @@
-name: CI msvc-carts
+name: CI-msvc-carts
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build_and_test:
@@ -34,14 +34,16 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-          cache: 'gradle'
+          cache: gradle
 
       - name: Grant execute permission for Gradle Wrapper
         run: chmod +x gradlew
 
-      - name: Wait for Postgres
+      - name: Wait for Postgres to be ready
         run: |
-          for i in {1..30}; do pg_isready -h localhost -p 5432 -U postgres && break || sleep 1; done
+          for i in {1..30}; do
+            pg_isready -h localhost -p 5432 -U postgres && break || sleep 1
+          done
 
       - name: Build and Run Tests
         env:

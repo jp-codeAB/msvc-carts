@@ -14,13 +14,13 @@ COPY --from=builder /app/build/libs/*.jar app.jar
 
 EXPOSE 8086
 
-ENV SPRING_PROFILES_ACTIVE=""
-ENV CONFIG_SERVER_URI=""
-ENV EUREKA_URI=""
-ENV DB_HOST=""
-ENV DB_PORT=""
-ENV DB_NAME=""
-ENV DB_USER=""
-ENV DB_PASSWORD=""
+ENV SPRING_PROFILES_ACTIVE=dev \
+    CONFIG_SERVER_URI=http://config-server:8888 \
+    EUREKA_URI=http://eureka-server:8761/eureka/ \
+    DB_HOST=postgres \
+    DB_PORT=5432 \
+    DB_NAME=cartdb \
+    DB_USER=postgres \
+    DB_PASSWORD=100juanU
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
