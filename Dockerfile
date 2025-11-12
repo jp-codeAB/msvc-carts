@@ -7,12 +7,13 @@ COPY src src
 
 RUN gradle clean build -x test --no-daemon
 
-FROM eclipse-temurin:21-jdk
+FROM eclipse-temurin:21-jre
 WORKDIR /app
 
 COPY --from=builder /app/build/libs/*.jar app.jar
 
 EXPOSE 8086
+HEALTHCHECK CMD curl -f http://localhost:8086/actuator/health || exit 1
 
 ENV SPRING_PROFILES_ACTIVE=dev \
     CONFIG_SERVER_URI=http://config-server:8888 \
@@ -24,3 +25,4 @@ ENV SPRING_PROFILES_ACTIVE=dev \
     DB_PASSWORD=100juanU
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
